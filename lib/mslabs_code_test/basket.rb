@@ -1,10 +1,9 @@
 module MslabsCodeTest
   class Basket
-    attr_accessor :items, :total
+    attr_accessor :items
 
     def initialize
       @items = []
-      @total = 0.0
     end
 
     def add_items(items)
@@ -13,19 +12,26 @@ module MslabsCodeTest
       end
     end
 
-    def calculate_total
-      subtotal
-      add_delivery_charge
-      total_in_pounds
+    def total
+      calculate_total!
     end
 
     private
 
-    def total_in_pounds
-      "£%.2f" % @total
+    def calculate_total!
+      @total = 0
+      subtotal!
+      apply_discounts!
+      add_delivery_charge!
+      total_in_pounds!
+      @total
     end
 
-    def add_delivery_charge
+    def total_in_pounds!
+      @total = "£%.2f" % @total
+    end
+
+    def add_delivery_charge!
       @total +=
         case @total
           when 0.01..49.99 then 4.95
@@ -34,9 +40,19 @@ module MslabsCodeTest
         end
     end
 
-    def subtotal
+    def subtotal!
       @items.each do |item|
         @total += item.price
+      end
+    end
+
+    def apply_discounts!
+      bogohp_items = @items.select{|product| product.discount == :bogohp }
+
+      unless bogohp_items.empty?
+        discount = (bogohp_items.first.price / 2).round(2)
+        eligible_items = bogohp_items.length / 2
+        @total -= (eligible_items * discount).round(2)
       end
     end
   end
