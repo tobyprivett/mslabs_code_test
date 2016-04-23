@@ -16,10 +16,13 @@ And then run bundler:
 
 ## Usage
 
-The programme has a command line interface that expects the path to a JSON file
-as a parameter.
+The programme has a command line interface that expects JSON files containing
+products and delivery charges. Sample data has been provided within the
+data/ directory.
 
-    $ ./bin/shop data/sample_products.json
+To run the programme with the sample data:
+
+    $ ./bin/shop data/sample_products.json data/delivery_charges.json
 
 
 For console access:

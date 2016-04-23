@@ -6,7 +6,9 @@ describe MslabsCodeTest::Basket do
   describe "making a purchase" do
 
     let!(:inventory) { File.read("data/sample_products.json") }
-    let!(:basket) { MslabsCodeTest::Basket.new(inventory) }
+    let!(:delivery_charges) { File.read("data/delivery_charges.json") }
+
+    let!(:basket) { MslabsCodeTest::Basket.new(inventory, delivery_charges) }
 
     before do
       basket.add(products)
@@ -49,7 +51,6 @@ describe MslabsCodeTest::Basket do
         expect(subject).to eql("£60.85")
       end
     end
-
 
     context "with two pairs of socks and three pairs of jeans" do
       let(:products) { %w{ S01 S01 J01 J01 J01 } }

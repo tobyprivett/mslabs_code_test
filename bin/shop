@@ -4,7 +4,7 @@ require "bundler/setup"
 require "mslabs_code_test"
 include MslabsCodeTest
 
-@basket = Basket.new(ARGF.read)
+@basket = Basket.new(File.read(ARGV[0]), File.read(ARGV[1]))
 
 puts "The store is open."
 puts "To add an item to your basket type the code, e.g. `JO1`. Type `exit` to leave."

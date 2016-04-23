@@ -1,9 +1,10 @@
 module MslabsCodeTest
   class Basket
-    attr_accessor :items, :inventory
+    attr_accessor :items, :inventory, :delivery_charges
 
-    def initialize(products)
+    def initialize(products, delivery_charges)
       @inventory = Inventory.new(products)
+      @delivery_charges = DeliveryCharge.price_bands(delivery_charges)
       @items = []
     end
 
@@ -33,12 +34,12 @@ module MslabsCodeTest
     end
 
     def add_delivery_charge!
-      @total +=
-        case @total
-          when 0.01..49.99 then 4.95
-          when 50.0..89.99 then 2.95
-          else 0
+      delivery =
+        @delivery_charges.find do |price_band|
+          @total >= price_band[:price_min] && @total <= price_band[:price_max]
         end
+
+      @total += delivery[:charge] if delivery
     end
 
     def subtotal!
