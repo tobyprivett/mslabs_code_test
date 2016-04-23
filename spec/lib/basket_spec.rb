@@ -9,7 +9,7 @@ describe MslabsCodeTest::Basket do
   describe "making a purchase" do
     let!(:basket) { MslabsCodeTest::Basket.new }
 
-    before { basket.add_products(products) }
+    before { basket.add_items(products) }
 
     subject { basket.calculate_total }
 

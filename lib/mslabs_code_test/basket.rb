@@ -7,8 +7,10 @@ module MslabsCodeTest
       @items = []
     end
 
-    def add_products(items)
-      @items << items
+    def add_items(items)
+      items.each do |item|
+        @items << Inventory.products.find{|product| product.code == item}
+      end
     end
 
     def calculate_total
