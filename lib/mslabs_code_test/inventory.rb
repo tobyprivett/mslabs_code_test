@@ -1,12 +1,15 @@
 module MslabsCodeTest
   class Inventory
 
-    def self.products
-      [
-        Product.new("Jeans", "J01", 32.95, :bogohp),
-        Product.new("Blouse", "B01", 24.95),
-        Product.new("Socks", "S01", 7.95)
-      ]
+    def initialize(products_json)
+      @products =
+        JSON.parse(products_json, symbolize_names: true).map do |product_json|
+          Product.new(product_json)
+      end
+    end
+
+    def lookup(code)
+      @products.find{|product| product.code == code}
     end
   end
 end

@@ -1,0 +1,5 @@
+[
+  {"description": "Jeans", "code": "J01", "price": 32.95, "discount": "bogohp"},
+  {"description": "Blouse", "code": "B01", "price": 24.95},
+  {"description": "Socks", "code": "S01", "price": 7.95}
+]

@@ -6,11 +6,12 @@ include MslabsCodeTest
 describe MslabsCodeTest::Inventory do
   context "#products" do
 
-    subject { Inventory.products }
+    let!(:inventory) { Inventory.new(File.read("data/sample_products.json")) }
+
     it "has three products" do
-      expect(subject[0].code).to eq("J01")
-      expect(subject[1].code).to eq("B01")
-      expect(subject[2].code).to eq("S01")
+      expect(inventory.lookup("J01").description).to eq("Jeans")
+      expect(inventory.lookup("B01").description).to eq("Blouse")
+      expect(inventory.lookup("S01").description).to eq("Socks")
     end
   end
 end

@@ -1,14 +1,15 @@
 module MslabsCodeTest
   class Basket
-    attr_accessor :items
+    attr_accessor :items, :inventory
 
-    def initialize
+    def initialize(products)
+      @inventory = Inventory.new(products)
       @items = []
     end
 
     def add(items)
       items.each do |item|
-        @items << Inventory.products.find{|product| product.code == item}
+        @items << @inventory.lookup(item)
       end
     end
 

@@ -2,12 +2,11 @@ require "spec_helper"
 require "mslabs_code_test"
 
 describe MslabsCodeTest::Basket do
-  it "initializes a Basket" do
-    expect(MslabsCodeTest::Basket.new).to be_a(MslabsCodeTest::Basket)
-  end
 
   describe "making a purchase" do
-    let!(:basket) { MslabsCodeTest::Basket.new }
+
+    let!(:inventory) { File.read("data/sample_products.json") }
+    let!(:basket) { MslabsCodeTest::Basket.new(inventory) }
 
     before do
       basket.add(products)

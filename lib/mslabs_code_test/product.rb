@@ -3,11 +3,11 @@ module MslabsCodeTest
 
     attr_accessor :description, :code, :price, :discount
 
-    def initialize(description, code, price, discount=nil)
-      @description = description
-      @code = code
-      @price = price
-      @discount = discount
+    def initialize(opts)
+      @description = opts[:description]
+      @code = opts[:code]
+      @price = opts[:price]
+      @discount = opts[:discount].to_sym if opts[:discount]
     end
   end
 end
