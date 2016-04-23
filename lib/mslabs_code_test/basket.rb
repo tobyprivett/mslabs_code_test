@@ -26,7 +26,12 @@ module MslabsCodeTest
     end
 
     def add_delivery_charge
-      @total += 4.95 if !items.empty? && @total < 50.0
+      @total +=
+        case @total
+          when 0.01..49.99 then 4.95
+          when 50.0..89.99 then 2.95
+          else 0
+        end
     end
 
     def subtotal
