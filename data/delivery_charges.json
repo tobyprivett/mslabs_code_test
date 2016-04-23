@@ -1,0 +1,4 @@
+[
+  {"price_min": 0.01, "price_max": 49.99, "charge": 4.95},
+  {"price_min": 50.0, "price_max": 89.99, "charge": 2.95}
+]
