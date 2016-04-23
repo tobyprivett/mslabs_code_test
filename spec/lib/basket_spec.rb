@@ -17,15 +17,19 @@ describe MslabsCodeTest::Basket do
       let(:products) { [] }
 
       it "totals 0.00" do
-        expect(subject).to eql(0.00)
+        expect(subject).to eql("£0.00")
       end
     end
 
-    context "with a pair of jeans and a blouse" do
-      let(:products) { %w{ J01 B01 } }
+    context "with a pair of socks and a blouse" do
+      let(:products) { %w{ S01 B01 } }
 
       it "has 2 items" do
         expect(basket.items.length).to eql(2)
+      end
+
+      it "totals 37.85" do
+        expect(subject).to eql("£37.85")
       end
     end
   end
