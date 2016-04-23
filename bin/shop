@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "mslabs_code_test"
+include MslabsCodeTest
+
+@basket = Basket.new(ARGF.read)
+
+puts "The store is open."
+puts "To add an item to your basket type the code, e.g. `JO1`. Type `exit` to leave."
+
+while STDIN.gets
+  begin
+    cmd = $_.strip
+    exit if cmd == 'exit'
+    @basket.add([cmd])
+
+    unless @basket.items.empty?
+      puts "Your basket contains #{ @basket.items.map(&:code).join(", ") }"
+      puts "The current total is: #{ @basket.total }"
+    end
+  rescue
+    puts "I'm sorry, I don't know that item."
+    exit
+  end
+end
