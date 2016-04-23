@@ -20,5 +20,13 @@ describe MslabsCodeTest::Basket do
         expect(subject).to eql(0.00)
       end
     end
+
+    context "with a pair of jeans and a blouse" do
+      let(:products) { %w{ J01 B01 } }
+
+      it "has 2 items" do
+        expect(basket.items.length).to eql(2)
+      end
+    end
   end
 end
