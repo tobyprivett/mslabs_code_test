@@ -10,7 +10,7 @@ describe MslabsCodeTest::Basket do
     let!(:basket) { MslabsCodeTest::Basket.new }
 
     before do
-      basket.add_items(products)
+      basket.add(products)
     end
 
     subject { basket.total }

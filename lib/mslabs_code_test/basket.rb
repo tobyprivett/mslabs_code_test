@@ -6,7 +6,7 @@ module MslabsCodeTest
       @items = []
     end
 
-    def add_items(items)
+    def add(items)
       items.each do |item|
         @items << Inventory.products.find{|product| product.code == item}
       end
