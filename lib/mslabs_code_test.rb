@@ -3,6 +3,7 @@ require "mslabs_code_test/basket"
 require "mslabs_code_test/inventory"
 require "mslabs_code_test/product"
 require "mslabs_code_test/delivery_charge"
+require "mslabs_code_test/discount"
 require "json"
 
 module MslabsCodeTest

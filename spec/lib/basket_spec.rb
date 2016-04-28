@@ -7,8 +7,11 @@ describe MslabsCodeTest::Basket do
 
     let!(:inventory) { File.read("data/sample_products.json") }
     let!(:delivery_charges) { File.read("data/delivery_charges.json") }
+    let!(:discounts) { File.read("data/discounts.json") }
 
-    let!(:basket) { MslabsCodeTest::Basket.new(inventory, delivery_charges) }
+    let!(:basket) do
+      MslabsCodeTest::Basket.new(inventory, delivery_charges, discounts)
+    end
 
     before do
       basket.add(products)
@@ -41,6 +44,10 @@ describe MslabsCodeTest::Basket do
 
       it "totals 54.37" do
         expect(subject).to eql("£54.37")
+      end
+
+      it "has a discount" do
+        expect(basket.discounts.length).to eql(1)
       end
     end
 

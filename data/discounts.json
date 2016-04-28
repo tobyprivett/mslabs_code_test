@@ -1,0 +1,12 @@
+[
+  {
+    "product_combo": ["J01", "J01"],
+    "offers":
+      [
+        {
+          "code": "J01",
+          "discount": 0.5
+        }
+      ]
+  }
+]

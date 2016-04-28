@@ -1,10 +1,11 @@
 module MslabsCodeTest
   class Basket
-    attr_accessor :items, :inventory, :delivery_charges
+    attr_accessor :items, :inventory, :delivery_charges, :discounts
 
-    def initialize(products, delivery_charges)
+    def initialize(products, delivery_charges, discounts)
       @inventory = Inventory.new(products)
       @delivery_charges = DeliveryCharge.price_bands(delivery_charges)
+      @discounts = Discount.parse_json(discounts)
       @items = []
     end
 
@@ -49,13 +50,11 @@ module MslabsCodeTest
     end
 
     def apply_discounts!
-      bogohp_items = @items.select{|product| product.discount == :bogohp }
-
-      unless bogohp_items.empty?
-        discount = (bogohp_items.first.price / 2).round(2)
-        eligible_items = bogohp_items.length / 2
-        @total -= (eligible_items * discount).round(2)
+      discounts_value = 0
+      discounts.map do |discount|
+        discounts_value += discount.apply_to_product_codes(items)
       end
+      @total -= discounts_value
     end
   end
 end
